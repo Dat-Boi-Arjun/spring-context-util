@@ -15,16 +15,18 @@ public class CustomClassLoader extends URLClassLoader {
     }
 
     @Override
-    public Class<?> findClass(String name) throws ClassNotFoundException{
-        //need to implement method with input directory
-        URLClassLoader cl = new URLClassLoader(indir);
-        Class<?> foundClass = cl.loadClass(name);
+    public Class<?> findClass(String name){
+        try {
+            //need to implement method with input directory
+            URLClassLoader cl = new URLClassLoader(indir);
+            Class<?> foundClass = cl.loadClass(name);
 
-        if (foundClass == null){
-            foundClass = super.findClass(name);
-        }
+            if (foundClass == null) {
+                foundClass = super.findClass(name);
+            }
 
-        return foundClass;
+            return foundClass;
+        } catch(ClassNotFoundException ignore){}//we already call the parent class loader if class isn't found
     }
 
     
