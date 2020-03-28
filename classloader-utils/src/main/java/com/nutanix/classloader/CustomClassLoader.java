@@ -16,17 +16,18 @@ public class CustomClassLoader extends URLClassLoader {
 
     @Override
     public Class<?> findClass(String name){
+        Class<?> foundClass = null;
         try {
             //need to implement method with input directory
             URLClassLoader cl = new URLClassLoader(indir);
-            Class<?> foundClass = cl.loadClass(name);
+            foundClass = cl.loadClass(name);
 
             if (foundClass == null) {
                 foundClass = super.findClass(name);
             }
 
-            return foundClass;
         } catch(ClassNotFoundException ignore){}//we already call the parent class loader if class isn't found
+        return foundClass;
     }
 
     
