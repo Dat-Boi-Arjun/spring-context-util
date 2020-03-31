@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/classloader-utils.iml" filepath="$PROJECT_DIR$/classloader-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../classloader-utils-test/classloader-utils-test.iml" filepath="$PROJECT_DIR$/../classloader-utils-test/classloader-utils-test.iml" />
     </modules>
   </component>
 </project>
