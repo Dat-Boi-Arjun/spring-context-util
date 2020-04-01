@@ -4,16 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+  <artifactId>classloader-utils</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+    <module>fixture1-test</module>
+    <module>fixture2-test</module>
+  </modules>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.1.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
+      <groupId>com.nutanix.apis</groupId>
+      <artifactId>fixture1-test</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.nutanix.apis</groupId>
+      <artifactId>fixture2-test</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <parent>
@@ -21,8 +33,6 @@
     <artifactId>spring-context-utils</artifactId>
     <version>0.1.0-SNAPSHOT</version>
   </parent>
-
-  <artifactId>classloader-utils</artifactId>
   <build>
     <plugins>
       <plugin>
@@ -71,7 +81,7 @@
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.80</minimum>
+                      <minimum>0.50</minimum><!-- just for now while I write tests-->
                     </limit>
                   </limits>
                 </rule>
@@ -79,6 +89,57 @@
               <excludes>
                 <exclude>*Test</exclude>
               </excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.2</version>
+        <executions>
+          <execution>
+            <id>copyClass1</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.apis</groupId>
+                  <artifactId>fixture1-test</artifactId>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.basedir}/src/test/fixtures/dir1</outputDirectory>
+                  <destFileName>TestClass1.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.basedir}/fixture1-test/src/main/java</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copyClass2</id>
+            <phase>test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.apis</groupId>
+                  <artifactId>fixture2-test</artifactId>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.basedir}/src/test/fixtures/dir2</outputDirectory>
+                  <destFileName>TestClass2.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.basedir}/fixture2-test/src</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>
           </execution>
         </executions>
