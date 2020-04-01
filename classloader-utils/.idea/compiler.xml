@@ -9,11 +9,14 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar" />
         </processorPath>
-        <module name="classloader-utils" />
+        <module name="fixture2-test" />
+        <module name="fixture1-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="classloader-utils" target="1.8" />
+      <module name="fixture1-test" target="1.8" />
+      <module name="fixture2-test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
