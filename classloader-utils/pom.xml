@@ -91,6 +91,7 @@
             <testDir1>${testDir1.location}</testDir1>
             <testDir2>${testDir2.location}</testDir2>
             <buildDirectory>${project.build.directory}</buildDirectory>
+            <baseDir>${project.basedir}/classloader-utils</baseDir>
           </systemPropertyVariables>
         </configuration>
       </plugin>
