@@ -5,11 +5,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>classloader-utils</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-    <module>fixture1-test</module>
-    <module>fixture2-test</module>
-  </modules>
+  <packaging>jar</packaging>
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
@@ -28,6 +24,10 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
+  <properties>
+    <testDir1.location>${project.build.directory}/fixtures/dir1</testDir1.location>
+    <testDir2.location>${project.build.directory}/fixtures/dir2</testDir2.location>
+  </properties>
   <parent>
     <groupId>com.nutanix.apis</groupId>
     <artifactId>spring-context-utils</artifactId>
@@ -35,64 +35,6 @@
   </parent>
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>1.18.10</version>
-            </path>
-          </annotationProcessorPaths>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.4</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>jacoco-check</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <rule>
-                  <element>PACKAGE</element>
-                  <limits>
-                    <limit>
-                      <counter>LINE</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>0.50</minimum><!-- just for now while I write tests-->
-                    </limit>
-                  </limits>
-                </rule>
-              </rules>
-              <excludes>
-                <exclude>*Test</exclude>
-              </excludes>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -109,15 +51,13 @@
                 <artifactItem>
                   <groupId>com.nutanix.apis</groupId>
                   <artifactId>fixture1-test</artifactId>
+                  <version>${project.version}</version>
                   <type>jar</type>
                   <overWrite>false</overWrite>
-                  <outputDirectory>${project.basedir}/src/test/fixtures/dir1</outputDirectory>
+                  <outputDirectory>${testDir1.location}</outputDirectory>
                   <destFileName>TestClass1.jar</destFileName>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.basedir}/fixture1-test/src/main/java</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>
           </execution>
           <execution>
@@ -131,18 +71,28 @@
                 <artifactItem>
                   <groupId>com.nutanix.apis</groupId>
                   <artifactId>fixture2-test</artifactId>
+                  <version>${project.version}</version>
                   <type>jar</type>
                   <overWrite>false</overWrite>
-                  <outputDirectory>${project.basedir}/src/test/fixtures/dir2</outputDirectory>
+                  <outputDirectory>${testDir2.location}</outputDirectory>
                   <destFileName>TestClass2.jar</destFileName>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.basedir}/fixture2-test/src</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19</version>
+        <configuration>
+          <systemPropertyVariables>
+            <testDir1>${testDir1.location}</testDir1>
+            <testDir2>${testDir2.location}</testDir2>
+            <buildDirectory>${project.build.directory}</buildDirectory>
+          </systemPropertyVariables>
+        </configuration>
       </plugin>
     </plugins>
   </build>
