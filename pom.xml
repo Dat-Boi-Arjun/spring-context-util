@@ -87,7 +87,7 @@
                     <limit>
                       <counter>LINE</counter>
                       <value>COVEREDRATIO</value>
-                      <minimum>0.90</minimum><!-- just for now while I write tests-->
+                      <minimum>0.10</minimum><!-- just for now while I write tests-->
                     </limit>
                   </limits>
                 </rule>
