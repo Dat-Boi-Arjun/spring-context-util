@@ -42,7 +42,7 @@
         <executions>
           <execution>
             <id>copyClass1</id>
-            <phase>test</phase>
+            <phase>process-test-classes</phase>
             <goals>
               <goal>copy</goal>
             </goals>
@@ -62,7 +62,7 @@
           </execution>
           <execution>
             <id>copyClass2</id>
-            <phase>test</phase>
+            <phase>process-test-classes</phase>
             <goals>
               <goal>copy</goal>
             </goals>
