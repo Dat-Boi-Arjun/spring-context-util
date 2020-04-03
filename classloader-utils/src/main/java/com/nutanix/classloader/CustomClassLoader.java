@@ -2,6 +2,7 @@ package com.nutanix.classloader;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -31,8 +32,13 @@ public class CustomClassLoader extends URLClassLoader {
       jars = baseDir.listFiles((dir, name) -> name.endsWith(".jar"));//tests if it is a jar file
     }
 
-    URL[] urls = Arrays.stream(jars).forEach((jar) -> jar.toURI().toURL())
-                       .toArray();//TODO need to figure out how to handle this exception
+    URL[] urls = Arrays.stream(jars).map((File jar) -> {
+      try{
+        return jar.toURI().toURL();
+      } catch (MalformedURLException ex){
+        throw new RuntimeException();
+      }
+    }).toArray(URL[]::new);
 
     // create a custom classloader instance with these folders in an array and return it.
     return new CustomClassLoader(urls, parentCl);
