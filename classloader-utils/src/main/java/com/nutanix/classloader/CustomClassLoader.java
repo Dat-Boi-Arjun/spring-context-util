@@ -1,11 +1,10 @@
 package com.nutanix.classloader;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 
 public class CustomClassLoader extends URLClassLoader {
 
@@ -32,11 +31,8 @@ public class CustomClassLoader extends URLClassLoader {
       jars = baseDir.listFiles((dir, name) -> name.endsWith(".jar"));//tests if it is a jar file
     }
 
-    URL[] urls = new URL[jars.length];
-
-    for (int i = 0; i < jars.length; i++) {
-      urls[i] = jars[i].toURI().toURL();
-    }
+    URL[] urls = Arrays.stream(jars).forEach((jar) -> jar.toURI().toURL())
+                       .toArray();//TODO need to figure out how to handle this exception
 
     // create a custom classloader instance with these folders in an array and return it.
     return new CustomClassLoader(urls, parentCl);
@@ -44,13 +40,15 @@ public class CustomClassLoader extends URLClassLoader {
 
   @Override
   public Class<?> findClass(String name) throws ClassNotFoundException {
-    //need to implement method with input directory
-    Class<?> foundClass = super.findClass(name);
-    if (foundClass == null) {
+    Class<?> foundClass = null;
+    try {
+      foundClass = super.loadClass(name);
+    }
+    catch (ClassNotFoundException ex1) {
       try {
         foundClass = super.findClass(name);
       }
-      catch (ClassNotFoundException ex) {
+      catch (ClassNotFoundException ex2) {
         this.parentCl.loadClass(name);
       }
     }
