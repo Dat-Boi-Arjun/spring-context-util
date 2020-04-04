@@ -80,6 +80,26 @@
               </artifactItems>
             </configuration>
           </execution>
+          <execution>
+            <id>copyClass3</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.nutanix.apis</groupId>
+                  <artifactId>fixture2-test</artifactId>
+                  <version>${project.version}</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${testDir2.location}</outputDirectory>
+                  <destFileName>TestClass1.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
