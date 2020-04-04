@@ -2,7 +2,6 @@ package com.nutanix.classloader;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -24,7 +23,7 @@ public class CustomClassLoader extends URLClassLoader {
 
     // if baseDir is not a directory - throw IllegalArgumentException
     if (!baseDir.isDirectory()) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(baseDir.getAbsolutePath() + " is not a directory");
     }
 
     // else - get all the jars from this folder. collect them in an array
@@ -32,11 +31,12 @@ public class CustomClassLoader extends URLClassLoader {
       jars = baseDir.listFiles((dir, name) -> name.endsWith(".jar"));//tests if it is a jar file
     }
 
-    URL[] urls = Arrays.stream(jars).map((File jar) -> {
+    URL[] urls = Arrays.stream(jars).map((jar) -> {
       try{
         return jar.toURI().toURL();
-      } catch (MalformedURLException ex){
-        throw new RuntimeException();
+      }
+      catch (MalformedURLException ex){
+        throw new RuntimeException(ex);
       }
     }).toArray(URL[]::new);
 
