@@ -32,10 +32,10 @@ public class CustomClassLoader extends URLClassLoader {
     }
 
     URL[] urls = Arrays.stream(jars).map((jar) -> {
-      try{
+      try {
         return jar.toURI().toURL();
       }
-      catch (MalformedURLException ex){
+      catch (MalformedURLException ex) {
         throw new RuntimeException(ex);
       }
     }).toArray(URL[]::new);

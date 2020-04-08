@@ -29,7 +29,7 @@ public class CustomClassLoaderTest {
   }
 
   @Test(dataProvider = "findsClass")
-  public void mustFindClassWhenLoadedByCustomClassLoader(CustomClassLoader cl, Class<?> loadedClass){
+  public void mustFindClassWhenLoadedByCustomClassLoader(CustomClassLoader cl, Class<?> loadedClass) {
     Assert.assertNotNull(cl);
     Assert.assertNotNull(loadedClass);
   }
@@ -81,7 +81,7 @@ public class CustomClassLoaderTest {
   }
 
   @Test
-  public void shouldNotFindFilesIfNotJars() throws MalformedURLException{
+  public void shouldNotFindFilesIfNotJars() throws MalformedURLException {
     String pathWithoutJars = baseDir.concat("/classloader-utils/src");
     CustomClassLoader cl = CustomClassLoader.classLoaderForPath(pathWithoutJars, systemClassLoader);
 
@@ -89,7 +89,7 @@ public class CustomClassLoaderTest {
   }
 
   @Test
-  public void mustFindDifferentClassesWithSameNameWithDifferentClassLoaders() throws ClassNotFoundException, MalformedURLException{
+  public void mustFindDifferentClassesWithSameNameWithDifferentClassLoaders() throws ClassNotFoundException, MalformedURLException {
     CustomClassLoader cl1 = CustomClassLoader.classLoaderForPath(path1, systemClassLoader);
     CustomClassLoader cl2 = CustomClassLoader.classLoaderForPath(path2, systemClassLoader);
     Class<?> testClassDir1 = cl1.findClass("TestClass1");
