@@ -20,5 +20,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.yaml:snakeyaml:1.25" level="project" />
     <orderEntry type="module" module-name="fixture1-test" />
     <orderEntry type="module" module-name="fixture2-test" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.10" level="project" />
   </component>
 </module>

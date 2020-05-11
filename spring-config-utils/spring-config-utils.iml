@@ -21,5 +21,6 @@
     <orderEntry type="module" module-name="classloader-utils" />
     <orderEntry type="module" module-name="fixture1-test" scope="RUNTIME" />
     <orderEntry type="module" module-name="fixture2-test" scope="RUNTIME" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.10" level="project" />
   </component>
 </module>
