@@ -1,15 +1,14 @@
 package com.nutanix.contextloader;
 
 import com.nutanix.classloader.CustomClassLoader;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.net.MalformedURLException;
 
-@Slf4j
-public class CustomContextLoader{
+//@Slf4j
+//@Data
+public class CustomContextLoader {
 
   private DefaultListableBeanFactory beanFactory;
   private AnnotationConfigApplicationContext parentCtx;
@@ -27,21 +26,11 @@ public class CustomContextLoader{
       ctx.refresh();
     }
     catch (MalformedURLException e) {
-      log.error("Failed", e);
+      //log.error("Failed", e);
     }
 
     return ctx;
   }
-    /*
-    Tests:
-    loadBeans
-    findBeansFromMulitpleConfigClass
-    getBeanfromContext
-    findParentBeanFromChild
-     */
-
-
-
 
 
 }
