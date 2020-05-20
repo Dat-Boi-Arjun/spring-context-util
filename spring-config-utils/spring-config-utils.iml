@@ -18,9 +18,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
-    <orderEntry type="module" module-name="classloader-utils" />
-    <orderEntry type="module" module-name="fixture1-test" scope="RUNTIME" />
-    <orderEntry type="module" module-name="fixture2-test" scope="RUNTIME" />
+    <orderEntry type="library" name="Maven: com.nutanix.apis:classloader-utils:0.1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="fixture1-test" />
+    <orderEntry type="module" module-name="fixture2-test" />
+    <orderEntry type="module" module-name="test-config-classes" scope="TEST" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.2.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:5.2.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.2.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.2.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.2.1.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:7.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.beust:jcommander:1.72" level="project" />

@@ -79,9 +79,9 @@ public class CustomClassLoaderTest {
     CustomClassLoader.classLoaderForPath(notDirectory, systemClassLoader);
   }
 
-  @Test
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void shouldNotFindFilesIfNotJars() throws MalformedURLException {
-    String pathWithoutJars = baseDir.concat("/classloader-utils/src");
+    String pathWithoutJars = System.getProperty("baseDir").concat("/classloader-utils/src");
     CustomClassLoader cl = CustomClassLoader.classLoaderForPath(pathWithoutJars, systemClassLoader);
 
     Assert.assertEquals(cl.getURLs().length, 0);

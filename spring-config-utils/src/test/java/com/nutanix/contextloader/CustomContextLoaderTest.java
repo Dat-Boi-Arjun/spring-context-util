@@ -7,11 +7,11 @@ import org.testng.annotations.Test;
 
 public class CustomContextLoaderTest {
 
-  private DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-  private AnnotationConfigApplicationContext parentCtx = new AnnotationConfigApplicationContext(beanFactory);
+  private final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+  private final AnnotationConfigApplicationContext parentCtx = new AnnotationConfigApplicationContext(beanFactory);
 
-  private CustomContextLoader ctxLoader = new CustomContextLoader(this.beanFactory, this.parentCtx);
-  private String configClassDir = System.getProperty("configClassDir");
+  private final CustomContextLoader ctxLoader = new CustomContextLoader(this.beanFactory, this.parentCtx);
+  private final String configClassDir = System.getProperty("configClassDir");
 
   /*
     Tests:
