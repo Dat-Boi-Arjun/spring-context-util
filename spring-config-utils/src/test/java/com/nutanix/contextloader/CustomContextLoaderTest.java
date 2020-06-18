@@ -1,16 +1,18 @@
 package com.nutanix.contextloader;
 
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+
+
 public class CustomContextLoaderTest {
 
-  private final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-  private final AnnotationConfigApplicationContext parentCtx = new AnnotationConfigApplicationContext(beanFactory);
+  private final AnnotationConfigApplicationContext parentCtx = new AnnotationConfigApplicationContext();
 
-  private final CustomContextLoader ctxLoader = new CustomContextLoader(this.beanFactory, this.parentCtx);
+  private final CustomContextLoader ctxLoader = new CustomContextLoader(this.parentCtx);
   private final String configClassDir = System.getProperty("configClassDir");
 
   /*
@@ -21,11 +23,23 @@ public class CustomContextLoaderTest {
     findParentBeanFromChild
   */
 
+  @Configuration
+  private class ParentConfig {
+    //dummy class for parent context
+    public ParentConfig(){}
+  }
+
+
   @Test
-  public void mustLoadBeans(){
-    AnnotationConfigApplicationContext ctx = ctxLoader.loadContext(this.configClassDir);
+  public void mustLoadBeans() throws MalformedURLException{
+    AnnotationConfigApplicationContext ctx = ctxLoader.loadContext(configClassDir);
     Assert.assertNotNull(ctx);
   }
 
-  //config classes need to be turned into jars using maven dependency plugin
+  @Test
+  public void mustfindBeansFromMultipleConfigClasses() throws MalformedURLException{
+    AnnotationConfigApplicationContext ctx = ctxLoader.loadContext(configClassDir);
+    Assert.assertTrue(ctx.containsBean("bean1"));
+    Assert.assertTrue(ctx.containsBean("bean3"));
+  }
 }

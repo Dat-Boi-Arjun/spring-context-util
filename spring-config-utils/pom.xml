@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>spring-config-utils</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.nutanix.apis</groupId>
             <artifactId>test-config-classes</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -32,6 +32,14 @@
             <artifactId>spring-context</artifactId>
             <version>5.2.3.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
     <parent>
         <artifactId>spring-context-utils</artifactId>
@@ -39,7 +47,7 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
     <properties>
-        <config-location>${project.build.directory}/configClasses</config-location>
+        <config-location>/Users/arjun/Documents/GitHub/spring-context-utils/test-config-classes/target</config-location>
     </properties>
     <build>
         <plugins>
@@ -52,53 +60,6 @@
                         <configClassDir>${config-location}</configClassDir>
                     </systemPropertyVariables>
                 </configuration>
-            </plugin>
-            <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <version>3.1.2</version>
-            <executions>
-                <execution>
-                    <id>copyConfigClass1</id>
-                    <phase>process-test-classes</phase>
-                    <goals>
-                        <goal>copy</goal>
-                    </goals>
-                    <configuration>
-                        <artifactItems>
-                            <artifactItem>
-                                <groupId>com.nutanix.apis</groupId>
-                                <artifactId>test-config-classes</artifactId>
-                                <version>${project.version}</version>
-                                <type>jar</type>
-                                <overWrite>false</overWrite>
-                                <outputDirectory>${config-location}</outputDirectory>
-                                <destFileName>ConfigClass1.jar</destFileName>
-                            </artifactItem>
-                        </artifactItems>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>copyConfigClass2</id>
-                    <phase>process-test-classes</phase>
-                    <goals>
-                        <goal>copy</goal>
-                    </goals>
-                    <configuration>
-                        <artifactItems>
-                            <artifactItem>
-                                <groupId>com.nutanix.apis</groupId>
-                                <artifactId>test-config-classes</artifactId>
-                                <version>${project.version}</version>
-                                <type>jar</type>
-                                <overWrite>false</overWrite>
-                                <outputDirectory>${config-location}</outputDirectory>
-                                <destFileName>ConfigClass2.jar</destFileName>
-                            </artifactItem>
-                        </artifactItems>
-                    </configuration>
-                </execution>
-            </executions>
             </plugin>
         </plugins>
     </build>
