@@ -20,12 +20,12 @@ public class CustomContextLoader {
     this.parentCtx = parentCtx;
   }
 
-  public AnnotationConfigApplicationContext loadContext(String classpath) throws MalformedURLException{
+  public AnnotationConfigApplicationContext loadContext(String classpath) throws MalformedURLException {
     CustomClassLoader cl = CustomClassLoader.classLoaderForPath(classpath, ClassLoader.getSystemClassLoader());
     AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 
-    try (InputStream is = cl.getResourceAsStream("applicationContext.properties")){
-      if (is != null){
+    try (InputStream is = cl.getResourceAsStream("applicationContext.properties")) {
+      if (is != null) {
         Properties properties = new Properties();
         properties.load(is);
         String baseConfigPackage = properties.getProperty("config.basePackage");

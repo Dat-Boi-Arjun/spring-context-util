@@ -11,15 +11,17 @@ import java.util.List;
 public class ConfigClass1 {
 
   @Bean(name = "bean1")
-  public String config1Bean1(){ return "A string";}
+  public String config1Bean1() {
+    return "A string";
+  }
 
   @Bean(name = "bean2")
-  public List<Integer> config1Bean2(){
+  public List<Integer> config1Bean2() {
     return new ArrayList<>();
   }
 
   @Bean(name = "bean5")
-  public String config1Bean3(){
+  public String config1Bean3() {
     return "Also a bean";
   }
 }

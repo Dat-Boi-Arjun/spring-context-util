@@ -17,6 +17,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.nutanix.apis:classloader-utils:0.1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="fixture1-test" />
     <orderEntry type="module" module-name="fixture2-test" />

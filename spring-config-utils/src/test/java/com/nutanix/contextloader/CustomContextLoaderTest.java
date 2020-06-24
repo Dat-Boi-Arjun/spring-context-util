@@ -26,18 +26,19 @@ public class CustomContextLoaderTest {
   @Configuration
   private class ParentConfig {
     //dummy class for parent context
-    public ParentConfig(){}
+    public ParentConfig() {
+    }
   }
 
 
   @Test
-  public void mustLoadBeans() throws MalformedURLException{
+  public void mustLoadBeans() throws MalformedURLException {
     AnnotationConfigApplicationContext ctx = ctxLoader.loadContext(configClassDir);
     Assert.assertNotNull(ctx);
   }
 
   @Test
-  public void mustfindBeansFromMultipleConfigClasses() throws MalformedURLException{
+  public void mustfindBeansFromMultipleConfigClasses() throws MalformedURLException {
     AnnotationConfigApplicationContext ctx = ctxLoader.loadContext(configClassDir);
     Assert.assertTrue(ctx.containsBean("bean1"));
     Assert.assertTrue(ctx.containsBean("bean3"));
